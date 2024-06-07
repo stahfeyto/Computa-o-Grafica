@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2:)</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #WebGL-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+          }
+        }
+    </script>
+</head>
+<body>
+<!-- Canvas for WebGL Output -->
+<canvas id="WebGL-canvas"></canvas>
+
+<script type="module">
+    import { WebGL } from "./WebGl.js";
+    import { Palete } from "./models/index.js";
+
+    async function init() {
+        await Palete.load();
+        const webgl = new WebGL(document.querySelector("#WebGL-canvas"));
+        function render() {
+            requestAnimationFrame(render);
+            webgl.render();
+        }
+        render();
+    }
+
+    init();
+</script>
+</body>
+</html>
